@@ -41,6 +41,13 @@ Future<void> _addTasks(String title)async{
    await StorageService().saveTasks(_tasks);
 }
 
+Future<void> _toggleTaskCompletion(int index)async{
+  setState(() {
+    _tasks[index]= _tasks[index].copyWith(isCompleted: !_tasks[index].isCompleted);
+  },);
+  await StorageService().saveTasks(_tasks);
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +65,7 @@ Future<void> _addTasks(String title)async{
        return TaskItem(
        key: ValueKey(_tasks[index].id),
         task: _tasks[index],
+        onToggle:() => _toggleTaskCompletion(index),
         );         
         } 
         ),
