@@ -4,7 +4,8 @@ import 'package:task_management_app/task_management/data/models/task_model.dart'
 import 'package:task_management_app/task_management/screens/home_screen/widgets/task_item.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final List<TaskModel> initialTasks;
+  const HomeScreen({super.key, required this.initialTasks});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -58,8 +59,10 @@ await StorageService().saveTasks(_tasks);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Task Manager'),
+
+        title: Center(child: const Text('Task Manager')),
       ),
       body: _isLoading ? const Center(
         child: Center(child: CircularProgressIndicator(),),
@@ -97,7 +100,12 @@ await StorageService().saveTasks(_tasks);
                   style:ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(16)
                   ),
-                  onPressed: ()=>_addTasks(_inputController.text),
+                  onPressed: (){
+                    if(_inputController.text.trim().isNotEmpty){
+                  _addTasks(_inputController.text.trim());     
+                    }
+                 
+                  },
                   child: Icon(Icons.add)
                   )
                   ],
