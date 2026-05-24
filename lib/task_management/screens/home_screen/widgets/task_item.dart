@@ -4,7 +4,11 @@ import 'package:task_management_app/task_management/data/models/task_model.dart'
 class TaskItem extends StatelessWidget {
   final TaskModel task;
   final VoidCallback onToggle;
-  const TaskItem({super.key, required this.task,required this.onToggle});
+  final VoidCallback onDelete;
+  const TaskItem({super.key,
+   required this.task
+  ,required this.onToggle
+  ,required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +24,10 @@ class TaskItem extends StatelessWidget {
           decoration: task.isCompleted?TextDecoration.lineThrough
           :null
          )
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: onDelete,
         ),
       ),
     );

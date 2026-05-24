@@ -48,6 +48,13 @@ Future<void> _toggleTaskCompletion(int index)async{
   await StorageService().saveTasks(_tasks);
 }
 
+Future<void> _deleteTask(int index)async{
+setState(() {
+  _tasks.removeAt(index);
+},);
+
+await StorageService().saveTasks(_tasks);
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +73,7 @@ Future<void> _toggleTaskCompletion(int index)async{
        key: ValueKey(_tasks[index].id),
         task: _tasks[index],
         onToggle:() => _toggleTaskCompletion(index),
+        onDelete:() => _deleteTask(index),
         );         
         } 
         ),
