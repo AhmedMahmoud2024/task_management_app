@@ -22,6 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
     _isLoading=false;
   }
  
+ @override
+  void dispose() {
+    _inputController.dispose();
+    super.dispose();
+  }
+
 Future<void> _fetchTasks()async{
  final savedTasks = await StorageService().loadTasks();
 setState(() {
